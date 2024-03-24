@@ -14,7 +14,7 @@ public struct ActionSheetSubHeadline: View {
     let text: String
     
     // MARK: - INITIALIZER
-    init(_ text: String) {
+    public init(_ text: String) {
         self.text = text
     }
     

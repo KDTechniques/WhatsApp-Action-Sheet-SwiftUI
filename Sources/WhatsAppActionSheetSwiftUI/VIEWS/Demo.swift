@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Demo: View {
+public struct Demo: View {
     // MARK: - PROPERTIES
     @State private var height: CGFloat = 0
     let buttonsArray: [ActionSheetButtonModel] = [
@@ -24,8 +24,10 @@ struct Demo: View {
         .init(text: "Delete Conversation", systemImageName: "trash", role: .destructive) { }
     ]}
     
+    public init() { }
+    
     // MARK: - BODY
-    var body: some View {
+    public var body: some View {
         Color.clear.sheet(isPresented: .constant(true)) {
             VStack(spacing: 12) {
                 ActionSheetHeadline(text: "John Doe", textOnly: false, alignment: .leading) {

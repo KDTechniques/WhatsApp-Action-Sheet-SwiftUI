@@ -14,7 +14,7 @@ public struct ActionSheetButtons: View {
     let buttonsArray: [ActionSheetButtonModel]
     
     // MARK: - INITIALIZER
-    init(_ buttonsArray: () -> [ActionSheetButtonModel]) {
+    public init(_ buttonsArray: () -> [ActionSheetButtonModel]) {
         self.buttonsArray = buttonsArray()
     }
     

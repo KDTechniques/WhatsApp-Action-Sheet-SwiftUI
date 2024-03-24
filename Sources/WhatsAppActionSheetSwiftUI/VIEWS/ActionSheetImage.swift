@@ -13,7 +13,7 @@ public struct ActionSheetImage<T: View>: View {
     let content: T
     
     // MARK: - INITIALIZER
-    init(imageSize: CGFloat, @ViewBuilder content: () -> T) {
+    public init(imageSize: CGFloat, @ViewBuilder content: () -> T) {
         self.imageSize = imageSize
         self.content = content()
     }

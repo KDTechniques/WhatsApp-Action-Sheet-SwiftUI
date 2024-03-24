@@ -18,7 +18,7 @@ public struct ActionSheetHeadline<T: View>: View {
     var frameHeight: CGFloat { imageSize + 2 }
     
     // MARK: - INITIALIZER
-    init(
+    public init(
         text: String,
         textOnly: Bool = true,
         alignment: HorizontalAlignment = .center,
