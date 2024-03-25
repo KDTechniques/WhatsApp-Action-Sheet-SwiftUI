@@ -20,30 +20,9 @@ public struct ActionSheetButtons: View {
     
     // MARK: - BODY
     public var body: some View {
-        VStack(spacing: 0) {
-            ForEach(buttonsArray) { button in
-                Button(role: button.role) {
-                    button.action()
-                } label: {
-                    HStack {
-                        Text(button.text)
-                        Spacer()
-                        Image(systemName: button.systemImageName)
-                            .font(.title2)
-                    }
-                    .foregroundStyle(button.role == .destructive ? .red : .primary)
-                    .padding()
-                }
-                .actionSheetButtonStyle
-                .overlay(alignment: .bottom) {
-                    if button.id != buttonsArray.last?.id {
-                        Divider().padding(.leading)
-                    }
-                }
-            }
-        }
-        .clipShape(.rect(cornerRadius: 10))
-        .padding(.horizontal)
+        VStack(spacing: 0) { ForEach(buttonsArray) { button($0) } }
+            .clipShape(.rect(cornerRadius: 10))
+            .padding(.horizontal)
     }
 }
 
@@ -63,5 +42,32 @@ public struct ActionSheetButtons: View {
             },
     ]
     
-    return ActionSheetButtons { buttonsArray }.padding(.horizontal)
+    return ActionSheetButtons { buttonsArray }.preview
+}
+
+#Preview("Demo") { Demo() }
+
+// MARK: - EXTENSION
+extension ActionSheetButtons {
+    // MARK: - button
+    private func button(_ button: ActionSheetButtonModel) -> some View {
+        Button(role: button.role) {
+            button.action()
+        } label: {
+            HStack {
+                Text(button.text)
+                Spacer()
+                Image(systemName: button.systemImageName)
+                    .font(.title2)
+            }
+            .foregroundStyle(button.role == .destructive ? .red : .primary)
+            .padding()
+        }
+        .actionSheetButtonStyle
+        .overlay(alignment: .bottom) {
+            if button.id != buttonsArray.last?.id {
+                Divider().padding(.leading)
+            }
+        }
+    }
 }
