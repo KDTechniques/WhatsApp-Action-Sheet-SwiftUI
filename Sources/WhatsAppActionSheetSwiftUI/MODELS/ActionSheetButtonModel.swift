@@ -16,7 +16,7 @@ public struct ActionSheetButtonModel: Identifiable {
     let action: () -> Void
     
     // MARK: - INITIALIZER
-    init(
+    public init(
         text: String,
         systemImageName: String,
         role: ButtonRole? = nil,
