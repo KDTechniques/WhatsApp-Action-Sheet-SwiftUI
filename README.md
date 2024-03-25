@@ -48,6 +48,9 @@ A WhatsApp like Action Sheet for SwiftUI apps.
 > Create a new Swift file, and copy and paste this code block there. 
 > Otherwise, create a new SwiftUI file, and use the 'Demo()' view to check this package for the first time.
 
+> [!IMPORTANT]
+> Always use **12px padding** for the **VStack** container as mentioned below to keep the standards. Otherwise, it looks bad.
+
 ``` swift
 import SwiftUI
 import WhatsAppActionSheetSwiftUI
