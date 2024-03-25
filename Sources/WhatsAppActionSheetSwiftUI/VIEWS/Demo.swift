@@ -38,8 +38,7 @@ public struct Demo: View {
                         text: "John Doe",
                         textOnly: false,
                         imageURL: .init(string: "https://picsum.photos/100"),
-                        placeholderSystemImageName: "person.circle.fill",
-                        alignment: .leading
+                        placeholderSystemImageName: "person.circle.fill"
                     )
                     
                     ActionSheetSubHeadline("Blocked contacts will no longer be able to call you or send you messages.\n\nIf you block and report this contact, the last 5 messages will be forwarded to WhatsApp and your chat with this contact will be deleted from this device only.")

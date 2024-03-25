@@ -13,24 +13,22 @@ public struct ActionSheetHeadline: View {
     let textOnly: Bool
     let imageURL: URL?
     let placeholderSystemImageName: String?
-    let alignment: HorizontalAlignment
     
     let imageSize: CGFloat = 40 // Standard Size for better UI/UX
     var frameHeight: CGFloat { imageSize + 2 }
+    var alignment: HorizontalAlignment { textOnly ? .center : .leading }
     
     // MARK: - INITIALIZER
     public init(
         text: String,
         textOnly: Bool = true,
         imageURL: URL? = nil,
-        placeholderSystemImageName: String? = nil,
-        alignment: HorizontalAlignment = .center
+        placeholderSystemImageName: String? = nil
     ) {
         self.text = text
         self.textOnly = textOnly
         self.imageURL = imageURL
         self.placeholderSystemImageName = placeholderSystemImageName
-        self.alignment = alignment
     }
     
     // MARK: - BODY
@@ -56,8 +54,7 @@ public struct ActionSheetHeadline: View {
         text: "Clear all messages from \"John Doe\"",
         textOnly: false,
         imageURL: .init(string: "https://picsum.photos/100"),
-        placeholderSystemImageName: "person.circle.fill",
-        alignment: .leading
+        placeholderSystemImageName: "person.circle.fill"
     )
 }
 
@@ -65,8 +62,7 @@ public struct ActionSheetHeadline: View {
     ActionSheetHeadline(
         text: "Clear all messages from \"John Doe\"",
         textOnly: false,
-        placeholderSystemImageName: "person.circle.fill",
-        alignment: .leading
+        placeholderSystemImageName: "person.circle.fill"
     )
 }
 
