@@ -6,27 +6,90 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
-public struct ActionSheetImage<T: View>: View {
+struct ActionSheetImage: View {
     // MARK: - PROERPTIES
+    @Environment(\.colorScheme) private var colorScheme
+    
+    let imageName: String?
     let imageSize: CGFloat
-    let content: T
+    let imageURL: URL?
     
     // MARK: - INITIALIZER
-    public init(imageSize: CGFloat, @ViewBuilder content: () -> T) {
+    init(placeholderSystemImageName: String? = nil, imageSize: CGFloat, imageURL: URL? = nil) {
+        imageName = placeholderSystemImageName
         self.imageSize = imageSize
-        self.content = content()
+        self.imageURL = imageURL
     }
     
     // MARK: - BODY
-    public var body: some View {
-        content
-            .frame(width: imageSize, height: imageSize)
-            .clipShape(Circle())
+    var body: some View {
+        Group {
+            if let imageURL {
+                webImage(imageURL)
+            } else if let imageName {
+                imageNotAvailable(imageName)
+            } else {
+                placeholder(fill: Color(uiColor: .systemGray5), stroke: Color(uiColor: .systemGray4))
+            }
+        }
+        .frame(width: imageSize, height: imageSize)
     }
 }
 
 // MARK: - PREVIEWS
-#Preview("ActionSheetImage") {
-    ActionSheetImage(imageSize: 40) { Color.red }
+#Preview("ActionSheetImage - success + placeholder") {
+    ActionSheetImage(
+        placeholderSystemImageName: "person.circle.fill",
+        imageSize: 40,
+        imageURL: .init(string: "https://picsum.photos/100")
+    )
+    .preview
+}
+
+#Preview("ActionSheetImage - failure + placeholder") {
+    ActionSheetImage(placeholderSystemImageName: "person.circle.fill", imageSize: 40)
+        .preview
+}
+
+#Preview("ActionSheetImage - failure + no placeholder") {
+    ActionSheetImage(imageSize: 40)
+        .preview
+}
+
+// MARK: - EXTENSIONS
+extension ActionSheetImage {
+    // MARK: - webImage
+    private func webImage(_ url: URL) -> some View {
+        WebImage(url: url, options: [.scaleDownLargeImages, .retryFailed])
+            .resizable()
+            .indicator { _, _ in Color(uiColor: .systemGray5) }
+            .scaledToFill()
+            .clipShape(Circle())
+            .overlay(
+                placeholder(fill: .clear, stroke: Color(uiColor: .systemGray5))
+                    .opacity(colorScheme == .dark ? 0 : 1)
+            )
+    }
+    
+    // MARK: - placeholder
+    private func placeholder(fill: Color, stroke: Color) -> some View {
+        Circle()
+            .fill(fill)
+            .strokeBorder(stroke, style: .init(
+                lineWidth: 1,
+                lineCap: .round,
+                lineJoin: .round
+            ))
+    }
+    
+    // MARK: - imageNotAvailable
+    private func imageNotAvailable(_ name: String) -> some View {
+        Image(systemName: name)
+            .resizable()
+            .scaledToFit()
+            .foregroundStyle(Color.secondary.gradient)
+            .symbolRenderingMode(.multicolor)
+    }
 }

@@ -9,7 +9,9 @@ import SwiftUI
 
 public struct Demo: View {
     // MARK: - PROPERTIES
+    @State private var isPresented: Bool = true
     @State private var height: CGFloat = 0
+    
     let buttonsArray: [ActionSheetButtonModel] = [
         .init(text: "Send a gift", systemImageName: "gift") { },
         .init(text: "Contact Info", systemImageName: "info.circle") { },
@@ -24,28 +26,34 @@ public struct Demo: View {
         .init(text: "Delete Conversation", systemImageName: "trash", role: .destructive) { }
     ]}
     
+    // MARK: - INITIALIZER
     public init() { }
     
     // MARK: - BODY
     public var body: some View {
-        Color.clear.sheet(isPresented: .constant(true)) {
-            VStack(spacing: 12) {
-                ActionSheetHeadline(text: "John Doe", textOnly: false, alignment: .leading) {
-                    AsyncImage(url: .init(string: "https://picsum.photos/100"))
-                        .scaledToFill()
+        Button("Show Action Sheet") { isPresented.toggle() }
+            .sheet(isPresented: $isPresented) {
+                VStack(spacing: 12) {
+                    ActionSheetHeadline(
+                        text: "John Doe",
+                        textOnly: false,
+                        imageURL: .init(string: "https://picsum.photos/100"),
+                        placeholderSystemImageName: "person.circle.fill",
+                        alignment: .leading
+                    )
+                    
+                    ActionSheetSubHeadline("Blocked contacts will no longer be able to call you or send you messages.\n\nIf you block and report this contact, the last 5 messages will be forwarded to WhatsApp and your chat with this contact will be deleted from this device only.")
+                    
+                    ActionSheetButtons { buttonsArray }
+                    
+                    ActionSheetButtons { destructiveButtonsArray }
                 }
-                
-                ActionSheetSubHeadline("Blocked contacts will no longer be able to call you or send you messages.\n\nIf you block and report this contact, the last 5 messages will be forwarded to WhatsApp and your chat with this contact will be deleted from this device only.")
-                
-                ActionSheetButtons { buttonsArray }
-                
-                ActionSheetButtons { destructiveButtonsArray }
+                .topTrailingDismissButton {
+                    isPresented = false
+                    print("Action Sheet Dismissed!")
+                }
+                .actionSheetDynamicHeight($height)
             }
-            .topTrailingDismissButton {
-                print("Dismissed!")
-            }
-            .actionSheet($height)
-        }
     }
 }
 

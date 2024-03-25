@@ -44,6 +44,13 @@ extension View {
             )
     }
     
+    // MARK: - preview
+    var preview: some View {
+        self
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color(uiColor: .systemGray6))
+    }
+    
     // MARK: - sheetTopTrailingCloseButtonViewModifier
     public func topTrailingDismissButton(_ action: @escaping () -> Void) -> some View {
         self
@@ -63,8 +70,8 @@ extension View {
             }
     }
     
-    // MARK: - actionSheet
-    public func actionSheet(_ height: Binding<CGFloat>) -> some View {
+    // MARK: - actionSheetDynamicHeight
+    public func actionSheetDynamicHeight(_ height: Binding<CGFloat>) -> some View {
         self
             .presentationDetents([.height(height.wrappedValue)])
             .presentationCornerRadius(20)
