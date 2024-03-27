@@ -4,9 +4,7 @@ A WhatsApp like Action Sheet for SwiftUI apps.
 ## # 1 - Introduction
 
 > [!IMPORTANT]
-> This action sheet is designed for **iOS** and **iPadOS** SwiftUI Apps only.
-> 
-> For now, this can be integrated with iOS 17/+ only. Please expect iOS 17 below from a future release.
+> This action sheet is designed for **iOS 17/+ iOS & iPadOS** SwiftUI Apps only.
 
 > [!WARNING]
 > You will not be able to manipulate the standard UI Components and their sizes, colors, etc... whatsoever.
