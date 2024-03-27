@@ -47,7 +47,7 @@ A WhatsApp like Action Sheet for SwiftUI apps.
 > Otherwise, create a new SwiftUI file, and use the 'Demo()' view to check this package for the first time.
 
 > [!IMPORTANT]
-> Always use **12px padding** for the **VStack** container as mentioned below to keep the standards. Otherwise, it looks bad.
+> Always use **spacing: 12px** and **default Padding** for the **VStack** container as mentioned below to keep the standards. Otherwise, it looks bad.
 
 ``` swift
 import SwiftUI
@@ -90,6 +90,7 @@ public struct WhateverView: View {
                     
                     ActionSheetButtons { destructiveButtonsArray }
                 }
+                .padding() // <<------ Mandatory
                 .topTrailingDismissButton { // <<------ Mandatory
                     isPresented = false
                     print("Action Sheet Dismissed!")
