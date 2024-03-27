@@ -47,6 +47,7 @@ public struct Demo: View {
                     
                     ActionSheetButtons { destructiveButtonsArray }
                 }
+                .padding()
                 .topTrailingDismissButton {
                     isPresented = false
                     print("Action Sheet Dismissed!")

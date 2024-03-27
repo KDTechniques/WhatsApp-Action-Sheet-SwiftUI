@@ -20,9 +20,12 @@ public struct ActionSheetButtons: View {
     
     // MARK: - BODY
     public var body: some View {
-        VStack(spacing: 0) { ForEach(buttonsArray) { button($0) } }
-            .clipShape(.rect(cornerRadius: 10))
-            .padding(.horizontal)
+        VStack(spacing: 0) {
+            ForEach(buttonsArray) {
+                button($0)
+            }
+        }
+        .clipShape(.rect(cornerRadius: 10))
     }
 }
 
