@@ -40,7 +40,6 @@ public struct ActionSheetHeadline: View {
         .frame(height: frameHeight)
         .frame(maxWidth: .infinity, alignment: .init(horizontal: alignment, vertical: .center))
         .actionSheetContentPadding(alignment)
-        .padding([.top, .horizontal])
     }
 }
 

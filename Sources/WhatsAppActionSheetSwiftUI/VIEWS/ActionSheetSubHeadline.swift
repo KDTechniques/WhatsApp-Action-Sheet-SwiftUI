@@ -27,7 +27,6 @@ public struct ActionSheetSubHeadline: View {
             .frame(maxWidth: .infinity)
             .background(colorScheme == .dark ? Color(uiColor: .systemGray5) : .white)
             .clipShape(.rect(cornerRadius: 10))
-            .padding(.horizontal)
     }
 }
 
