@@ -33,7 +33,7 @@ public struct Demo: View {
     public var body: some View {
         Button("Show Action Sheet") { isPresented.toggle() }
             .sheet(isPresented: $isPresented) {
-                VStack(spacing: 12) {
+                WhatsAppActionSheet {
                     ActionSheetHeadline(
                         text: "John Doe",
                         textOnly: false,
@@ -46,13 +46,7 @@ public struct Demo: View {
                     ActionSheetButtons { buttonsArray }
                     
                     ActionSheetButtons { destructiveButtonsArray }
-                }
-                .padding()
-                .topTrailingDismissButton {
-                    isPresented = false
-                    print("Action Sheet Dismissed!")
-                }
-                .actionSheetDynamicHeight($height)
+                } dismissAction: { isPresented = false }
             }
     }
 }
