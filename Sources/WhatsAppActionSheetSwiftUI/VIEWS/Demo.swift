@@ -10,7 +10,6 @@ import SwiftUI
 public struct Demo: View {
     // MARK: - PROPERTIES
     @State private var isPresented: Bool = true
-    @State private var height: CGFloat = 0
     
     let buttonsArray: [ActionSheetButtonModel] = [
         .init(text: "Send a gift", systemImageName: "gift") { },
