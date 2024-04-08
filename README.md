@@ -7,7 +7,7 @@ A WhatsApp like Action Sheet for SwiftUI apps.
 > This action sheet is designed for **iOS 17/+ iOS & iPadOS** SwiftUI Apps only.
 
 > [!WARNING]
-> You will not be able to manipulate the standard UI Components and their sizes, colors, etc... whatsoever.
+> You will not be able to manipulate the standard UI Components and their sizes, colors, alignments, etc... whatsoever.
 
 > [!CAUTION]
 > **Note**: Intended to use on a sheet only. ~~Not on a plain view~~. Otherwise, there will be color mismatches.
@@ -36,18 +36,13 @@ A WhatsApp like Action Sheet for SwiftUI apps.
 |||||
 |ActionSheetButtons|buttonsArray|[ActionSheetButtonModel]|Mandatory. Use the 'role' parameter only for destructive actions. Otherwise, exclude the parameter.|
 |||||
-|.topTrailingDismissButton (view modifier)|action|() -> Void|Mandatory|
-|||||
-|.actionSheetDynamicHeight (view modifier)|height|Binding<CGFloat>|Mandatory. It sets the sheet height to its content height.|
+|WhatsAppActionSheet|dismissAction|() -> Void|Mandatory. Use its closure to dismiss the action sheet, or to do something else.|
 
 ## # 3 - Usage
 
 > [!TIP]
 > Create a new Swift file, and copy and paste this code block there. 
 > Otherwise, create a new SwiftUI file, and use the 'Demo()' view to check this package for the first time.
-
-> [!IMPORTANT]
-> Always use **spacing: 12px** and **default Padding** for the **VStack** container as mentioned below to keep the standards. Otherwise, it looks bad.
 
 ``` swift
 import SwiftUI
@@ -56,7 +51,6 @@ import WhatsAppActionSheetSwiftUI
 public struct WhateverView: View {
     // MARK: - PROPERTIES
     @State private var isPresented: Bool = true
-    @State private var height: CGFloat = 0 // <<------ Mandatory
     
     let buttonsArray: [ActionSheetButtonModel] = [
         .init(text: "Send a gift", systemImageName: "gift") { },
@@ -76,7 +70,7 @@ public struct WhateverView: View {
     public var body: some View {
         Button("Show Action Sheet") { isPresented.toggle() }
             .sheet(isPresented: $isPresented) {
-                VStack(spacing: 12) {
+                WhatsAppActionSheet {
                     ActionSheetHeadline(
                         text: "John Doe",
                         textOnly: false,
@@ -89,13 +83,7 @@ public struct WhateverView: View {
                     ActionSheetButtons { buttonsArray }
                     
                     ActionSheetButtons { destructiveButtonsArray }
-                }
-                .padding() // <<------ Mandatory
-                .topTrailingDismissButton { // <<------ Mandatory
-                    isPresented = false
-                    print("Action Sheet Dismissed!")
-                }
-                .actionSheetDynamicHeight($height) // <<------ Mandatory
+                } dismissAction: { isPresented = false }
             }
     }
 }
